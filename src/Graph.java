@@ -51,7 +51,8 @@ public class Graph {
                 output += n.getName();
                 output += ", ";
             }
-            return output.substring(0, output.length() - 2);
+            if (!output.isEmpty()) return output.substring(0, output.length() - 2);
+            else return null;
         }
 
         public Node getNeighbor(String name) {

@@ -22,13 +22,23 @@ public class Main {
             System.out.println("What do you want to do? >");
             response = s.nextLine();
 
-            if (response.substring(0, 4).equals("goTo")) current = g.getNode(response.substring(5));
-            else if (response.substring(0, 4).equals("look")) System.out.println(current.getNeighborNames());
-            else if (response.substring(0, 3).equals("add")) {
+            if (response.substring(0, 4).equals("goTo")) {
+                if (g.getNode(response.substring(5)) == null) {
+                    System.out.println("Room does not exist");
+                } else {
+                    current = g.getNode(response.substring(5));
+                }
+
+            } else if (response.equals("look")) {
+                if (current.getNeighborNames() == null) System.out.println("No further rooms");
+                else System.out.println(current.getNeighborNames());
+
+            } else if (response.substring(0, 3).equals("add")) {
                 g.addNode(response.substring(9));
                 current = g.getNode(response.substring(8));
-            }
-            else System.out.println("Possible commands: \"goTo <roomname>\"; \"look\"; \"addRoom <roomname>\"; \"quit\"");
+
+            } else
+                System.out.println("Possible commands: \"goTo <roomname>\"; \"look\"; \"addRoom <roomname>\"; \"quit\"");
 
         } while (!response.equals("quit"));
     }
