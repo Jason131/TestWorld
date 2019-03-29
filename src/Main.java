@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Graph g = new Graph();
-        g.addNode("hall");
-        g.addNode("closet");
-        g.addNode("dungeon");
+        g.addNode("hall", "a long dank hallway");
+        g.addNode("closet", "where the corpses are kept");
+        g.addNode("dungeon", "");
 
         g.addDirectedEdge("hall", "dungeon");
         g.addUndirectedEdge("hall", "closet");
@@ -34,7 +34,7 @@ public class Main {
                 else System.out.println(current.getNeighborNames());
 
             } else if (response.substring(0, 3).equals("add")) {
-                g.addNode(response.substring(9));
+                g.addNode(response.substring(8),"");
                 current = g.getNode(response.substring(8));
 
             } else

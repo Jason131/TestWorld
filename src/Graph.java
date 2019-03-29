@@ -1,15 +1,18 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Graph {
-    private List<Node> nodes;
+    //private List<Node> nodes;
+    private HashMap<String, Node> nodes;
 
     public Graph() {
-        nodes = new ArrayList<Node>();
+        nodes = new HashMap<String, Node>();
     }
 
-    public void addNode(String n) {
-        nodes.add(new Node(n));
+    public void addNode(String n, String description) {
+        Node node = new Node (n, description);
+        nodes.put(n, node);
     }
 
     public void addDirectedEdge(String name1, String name2) {
@@ -26,19 +29,24 @@ public class Graph {
     }
 
     public Node getNode(String name) {
-        for (Node n : nodes) {
-            if (n.getName().equals(name)) return n;
-        }
-        return null;
+        return nodes.get(name);
     }
 
     public class Node {
         private String name;
         private ArrayList<Node> neighbors;
+        private String description;
 
-        private Node(String name) {
+        Node(String name) {
             neighbors = new ArrayList<Node>();
             this.name = name;
+            this.description = "";
+        }
+
+        private Node(String name, String description) {
+            neighbors = new ArrayList<Node>();
+            this.name = name;
+            this.description = description;
         }
 
         private void addNeighbor(Node n) {
@@ -48,11 +56,10 @@ public class Graph {
         public String getNeighborNames() {
             String output = "";
             for (Node n : neighbors) {
-                output += n.getName();
-                output += ", ";
+                output += n.getName() + " ";
             }
-            if (!output.isEmpty()) return output.substring(0, output.length() - 2);
-            else return null;
+
+            return output;
         }
 
         public Node getNeighbor(String name) {
