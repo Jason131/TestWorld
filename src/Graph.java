@@ -35,16 +35,19 @@ public class Graph {
     public class Node {
         private String name;
         private ArrayList<Node> neighbors;
+        private ArrayList<Item> items;
         private String description;
 
         Node(String name) {
             neighbors = new ArrayList<Node>();
+            items = new ArrayList<Item>();
             this.name = name;
             this.description = "";
         }
 
         private Node(String name, String description) {
             neighbors = new ArrayList<Node>();
+            items = new ArrayList<Item>();
             this.name = name;
             this.description = description;
         }
@@ -72,6 +75,26 @@ public class Graph {
 
         public String getName() {
             return name;
+        }
+
+        public ArrayList<Item> getItems() {
+            return items;
+        }
+
+        public void addItem(Item i) {
+            items.add(i);
+        }
+
+        public Item removeItem(String name) {
+            for (Item i:items) {
+                if(i.getName().equalsIgnoreCase(name)) {
+                    Item out = i;
+                    items.remove(i);
+                    return out;
+                }
+            }
+
+            return null;
         }
     }
 }
