@@ -31,6 +31,16 @@ public class Player {
         return items;
     }
 
+    public Item getItem(String name) {
+        for (Item i:items) {
+            if(i.getName().equalsIgnoreCase(name)) {
+                return i;
+            }
+        }
+
+        return null;
+    }
+
     public Graph.Node getCurrentRoom() {
         return currentRoom;
     }

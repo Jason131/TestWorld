@@ -21,10 +21,9 @@ public class Graph {
     }
 
     public void addUndirectedEdge(String name1, String name2) {
-        Node n1 = getNode(name1);
-        Node n2 = getNode(name2);
-        n1.addNeighbor(n2);
-        n2.addNeighbor(n2.getNeighbor(name1));
+        addDirectedEdge(name1, name2);
+        addDirectedEdge(name2, name1);
+
     }
 
     public Node getNode(String name) {
@@ -36,12 +35,10 @@ public class Graph {
         private String description;
         private ArrayList<Node> neighbors;
         private ArrayList<Item> items;
-        private ArrayList<Creature> creatures;
 
         private Node(String name, String description) {
             neighbors = new ArrayList<Node>();
             items = new ArrayList<Item>();
-            creatures = new ArrayList<Creature>();
             this.name = name;
             this.description = description;
         }
@@ -65,7 +62,7 @@ public class Graph {
 
         public Node getNeighbor(String name) {
             for (Node n : neighbors) {
-                if (n.getName().equals(name)) return n;
+                if (n.getName().equalsIgnoreCase(name)) return n;
             }
 
             return null;
@@ -73,6 +70,14 @@ public class Graph {
 
         public String getName() {
             return name;
+        }
+
+        public Item getItem(String name) {
+            for (Item i : items) {
+                if (i.getName().equalsIgnoreCase(name)) return i;
+            }
+
+            return null;
         }
 
         public ArrayList<Item> getItems() {

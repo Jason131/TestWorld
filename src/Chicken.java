@@ -8,4 +8,14 @@ public class Chicken extends Creature {
         int n = (int) (Math.random() * currentRoom.getNeighbors().size());
         currentRoom = currentRoom.getNeighbors().get(n);
     }
+
+    @Override
+    String getType() {
+        return "chicken";
+    }
+
+    @Override
+    Graph.Node getLocation() {
+        return currentRoom;
+    }
 }

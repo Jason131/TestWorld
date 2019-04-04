@@ -5,6 +5,6 @@ public abstract class Entity {
         this.currentRoom = currentRoom;
     }
 
-
-
+    protected Entity() {
+    }
 }

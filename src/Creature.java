@@ -4,4 +4,7 @@ public abstract class Creature extends Entity {
     }
 
     abstract void move();
+
+    abstract String getType();
+    abstract Graph.Node getLocation();
 }
