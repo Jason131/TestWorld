@@ -33,13 +33,15 @@ public class Graph {
 
     public class Node {
         private String name;
-        private ArrayList<Node> neighbors;
-        private ArrayList<Entity> items, creatures;
         private String description;
+        private ArrayList<Node> neighbors;
+        private ArrayList<Item> items;
+        private ArrayList<Creature> creatures;
 
         private Node(String name, String description) {
             neighbors = new ArrayList<Node>();
-            items = new ArrayList<Entity>();
+            items = new ArrayList<Item>();
+            creatures = new ArrayList<Creature>();
             this.name = name;
             this.description = description;
         }
@@ -73,7 +75,7 @@ public class Graph {
             return name;
         }
 
-        public ArrayList<Entity> getItems() {
+        public ArrayList<Item> getItems() {
             return items;
         }
 
@@ -81,14 +83,10 @@ public class Graph {
             items.add(i);
         }
 
-        public void addEntity(Entity x) {
-            creatures.add(x);
-        }
-
-        public Entity removeItem(String name) {
-            for (Entity i : items) {
+        public Item removeItem(String name) {
+            for (Item i : items) {
                 if (i.getName().equalsIgnoreCase(name)) {
-                    Entity out = i;
+                    Item out = i;
                     items.remove(i);
                     return out;
                 }
