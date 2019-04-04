@@ -11,7 +11,9 @@ public class Main {
         g.addDirectedEdge("hall", "closet");
         g.addDirectedEdge("hall", "dungeon");
 
-        g.getNode("hall").getNeighbor("closet").addItem(new Item("corpse", "can be used as fertilizer"));
+        g.getNode("hall").getNeighbor("closet").addItem(new Item(, "can be used as fertilizer"));
+
+        g.getNode("hall").add
 
         Player p = new Player("Bob", "Noob");
         p.setCurrentRoom(g.getNode("hall"));

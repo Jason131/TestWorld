@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Graph {
     //private List<Node> nodes;
@@ -11,7 +10,7 @@ public class Graph {
     }
 
     public void addNode(String n, String description) {
-        Node node = new Node (n, description);
+        Node node = new Node(n, description);
         nodes.put(n, node);
     }
 
@@ -35,19 +34,12 @@ public class Graph {
     public class Node {
         private String name;
         private ArrayList<Node> neighbors;
-        private ArrayList<Item> items;
+        private ArrayList<Entity> items, creatures;
         private String description;
-
-        Node(String name) {
-            neighbors = new ArrayList<Node>();
-            items = new ArrayList<Item>();
-            this.name = name;
-            this.description = "";
-        }
 
         private Node(String name, String description) {
             neighbors = new ArrayList<Node>();
-            items = new ArrayList<Item>();
+            items = new ArrayList<Entity>();
             this.name = name;
             this.description = description;
         }
@@ -65,6 +57,10 @@ public class Graph {
             return output;
         }
 
+        public ArrayList<Node> getNeighbors() {
+            return neighbors;
+        }
+
         public Node getNeighbor(String name) {
             for (Node n : neighbors) {
                 if (n.getName().equals(name)) return n;
@@ -77,7 +73,7 @@ public class Graph {
             return name;
         }
 
-        public ArrayList<Item> getItems() {
+        public ArrayList<Entity> getItems() {
             return items;
         }
 
@@ -85,10 +81,14 @@ public class Graph {
             items.add(i);
         }
 
-        public Item removeItem(String name) {
-            for (Item i:items) {
-                if(i.getName().equalsIgnoreCase(name)) {
-                    Item out = i;
+        public void addEntity(Entity x) {
+            creatures.add(x);
+        }
+
+        public Entity removeItem(String name) {
+            for (Entity i : items) {
+                if (i.getName().equalsIgnoreCase(name)) {
+                    Entity out = i;
                     items.remove(i);
                     return out;
                 }
