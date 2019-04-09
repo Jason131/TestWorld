@@ -34,6 +34,10 @@ public class Main {
 
             response = s.nextLine();
 
+            Command command = parseCommand(response);
+
+            command.execute();
+
             if (response.substring(0, 4).equalsIgnoreCase("goto")) {
                 String room = response.substring(response.indexOf("<") + 1, response.indexOf(">"));
                 p.setCurrentRoom(g.getNode(room));
