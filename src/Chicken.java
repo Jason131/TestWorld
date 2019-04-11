@@ -1,6 +1,7 @@
 public class Chicken extends Creature {
     public Chicken(Graph.Node currentNode) {
         super(currentNode);
+        this.currentRoom = currentNode;
     }
 
     @Override

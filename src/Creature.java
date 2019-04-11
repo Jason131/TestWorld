@@ -3,7 +3,7 @@ public abstract class Creature extends Entity {
         super(currentRoom);
     }
 
-    abstract void move();
+    abstract void move(Player p);
 
     abstract String getType();
     abstract Graph.Node getLocation();

@@ -30,6 +30,26 @@ public class Graph {
         return nodes.get(name);
     }
 
+    public static void findPathToPlayer(ArrayList<Graph.Node> nodesToSearch, ArrayList<Graph.Node> path, Graph.Node startingNode) {
+        for (Node node : nodesToSearch) {
+            if (node == path.get(0)) {
+                path.add(0, node);
+                if (node != startingNode) {
+                    nodesToSearch.clear();
+                    nodesToSearch.add(startingNode);
+                    findPathToPlayer(nodesToSearch, path, startingNode);
+                } else return;
+            }
+        }
+        for (Node node : nodesToSearch) {
+            for (Node newNode: node.getNeighbors()) {
+                nodesToSearch.add(newNode);
+            }
+            nodesToSearch.remove(node);
+        }
+        findPathToPlayer(nodesToSearch, path, startingNode);
+    }
+
     public class Node {
         private String name;
         private String description;
@@ -67,6 +87,8 @@ public class Graph {
 
             return null;
         }
+
+
 
         public String getName() {
             return name;
