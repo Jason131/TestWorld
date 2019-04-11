@@ -1,7 +1,7 @@
-public class Item extends Entity{
+public class Item{
     private String name, description;
 
-    public Item(String name, String description) {
+    public Item(Graph.Node currentRoom, String name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -21,6 +21,4 @@ public class Item extends Entity{
     public String getDescription() {
         return description;
     }
-
-
 }

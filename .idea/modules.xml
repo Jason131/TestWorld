@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GraphStructure.iml" filepath="$PROJECT_DIR$/GraphStructure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TextWorld.iml" filepath="$PROJECT_DIR$/TextWorld.iml" />
     </modules>
   </component>
 </project>
