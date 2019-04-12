@@ -15,11 +15,10 @@ public class Main {
         g.getNode("hall").getNeighbor("closet").addItem(new Item("corpse", "can be used as fertilizer"));
         g.getNode("hall").addItem(new Item("chair", "can sit on it"));
 
-        List<Creature> creatureList = new ArrayList<Creature>();
+
         Creature a = new Chicken(g.getNode("hall"));
         Creature b = new Chicken(g.getNode("hall"));
-        creatureList.add(a);
-        creatureList.add(b);
+        g.g
 
         Player p = new Player("Bob", "Noob");
         p.setCurrentRoom(g.getNode("hall"));
@@ -34,7 +33,7 @@ public class Main {
 
             response = s.nextLine();
 
-            Command command = parseCommand(response);
+            Command command = Command.parseCommand(response);
 
             command.execute();
 
@@ -42,7 +41,7 @@ public class Main {
                 String room = response.substring(response.indexOf("<") + 1, response.indexOf(">"));
                 p.setCurrentRoom(g.getNode(room));
                 for (Creature c : creatureList) {
-                    c.move();
+                    c.move(p);
                 }
 
             } else if (response.equalsIgnoreCase("look")) {

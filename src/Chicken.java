@@ -5,7 +5,7 @@ public class Chicken extends Creature {
     }
 
     @Override
-    void move() {
+    void move(Player player) {
         int n = (int) (Math.random() * currentRoom.getNeighbors().size());
         currentRoom = currentRoom.getNeighbors().get(n);
     }

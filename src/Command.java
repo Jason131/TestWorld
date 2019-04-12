@@ -1,11 +1,11 @@
 public abstract class Command {
-    Player player;
+    static Player player;
 
     public Command(Player player) {
         this.player = player;
     }
 
-    public Command parseCommand(String response) {
+    public static Command parseCommand(String response) {
         String commandWord = getFirstWordIn(response);
 
         if(commandWord.equalsIgnoreCase("look")) return new LookCommand(player);
@@ -20,16 +20,18 @@ public abstract class Command {
             return new TakeCommand(player, itemName);
         }
 
+
+
         return null;
     }
 
-    private String getLastWord(String response) {
+    private static String getLastWord(String response) {
         String[] words = response.split(" ");
         if(!response.isEmpty()) return words[words.length-1];
         else return null;
     }
 
-    private String getFirstWordIn(String response) {
+    private static String getFirstWordIn(String response) {
         String[] words = response.split(" ");
         if(!response.isEmpty()) return words[0];
         else return null;

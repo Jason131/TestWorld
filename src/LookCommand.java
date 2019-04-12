@@ -22,8 +22,9 @@ public class LookCommand extends Command {
             out += i.getName() + " ";
         }
         for (Creature c : creatureList) {
-            if (c.getLocation().getName().equalsIgnoreCase(p.getCurrentRoom().getName())) out += c.getType() + " ";
+            if (c.getLocation().getName().equalsIgnoreCase(player.getCurrentRoom().getName())) out += c.getType() + " ";
         }
+
         if (out.isEmpty()) System.out.println("This room appears to be empty.");
         else System.out.println("This room contains: " + out);
 

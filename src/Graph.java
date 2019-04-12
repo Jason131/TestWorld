@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Graph {
-    //private List<Node> nodes;
     private HashMap<String, Node> nodes;
+    private List<Creature> creatureList;
 
     public Graph() {
         nodes = new HashMap<String, Node>();
+        creatureList= new ArrayList<Creature>();
     }
 
     public void addNode(String n, String description) {
@@ -23,6 +25,20 @@ public class Graph {
     public void addUndirectedEdge(String name1, String name2) {
         addDirectedEdge(name1, name2);
         addDirectedEdge(name2, name1);
+    }
+
+    public void addCreature(Creature c) {
+        creatureList.add(c);
+    }
+
+    public List<Creature> getCreatures(Node n) {
+        List<Creature> output = new ArrayList<Creature>();
+
+        for (Creature c:creatureList) {
+            if(c.getLocation().equals(n.getName()))  output.add(c);
+        }
+
+        return output;
 
     }
 
