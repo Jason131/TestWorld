@@ -1,24 +1,28 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Graph g = new Graph();
+
+        //adding nodes
         g.addNode("hall", "a long dank hallway");
-        g.addNode("closet", "where the corpses are kept");
         g.addNode("dungeon", "a waste of real estate");
-
-        g.addUndirectedEdge("hall", "closet");
         g.addUndirectedEdge("hall", "dungeon");
+        g.addNode("bedroom", "where the bed is");
+        g.addUndirectedEdge("bedroom", "hall");
+        g.addNode("bathroom", "it's a bathroom, nothing more");
+        g.addUndirectedEdge("bathroom", "bedroom");
+        g.addNode("closet", "where the corpses are kept");
+        g.addUndirectedEdge("bathroom", "closet");
 
-        g.getNode("hall").getNeighbor("closet").addItem(new Item("corpse", "can be used as fertilizer"));
-        g.getNode("hall").addItem(new Item("chair", "can sit on it"));
+        //adding items
+        g.getNode("closet").addItem(new Item("corpse", "can be used as fertilizer"));
+        g.getNode("bedroom").addItem(new Item("chair", "can sit on it"));
 
-
-        Creature a = new Chicken(g.getNode("hall"));
-        Creature b = new Chicken(g.getNode("hall"));
-        g.g
+        //adding creatures
+        g.addCreature(new Chicken(g.getNode("bedroom")));
+        g.addCreature(new PopStar(g.getNode("bathroom")));
+        g.addCreature(new Wumpus(g.getNode("bathroom")));
 
         Player p = new Player("Bob", "Noob");
         p.setCurrentRoom(g.getNode("hall"));
@@ -29,68 +33,14 @@ public class Main {
         do {
             System.out.println("You are currently in the " + p.getCurrentRoom().getName());
             System.out.println("What do you want to do?");
-            System.out.println("Possible commands: \"look\";  \"view inventory\"; \"goTo <roomname>\"; \"addRoom <roomname>\"; \"take <itemname>\"; \"drop <itemname>\"; \"getDescription <itemname>\"; \"\" ;\"quit\" >");
+            System.out.println("Possible commands: \"look\"; \"inventory\"; \"goTo roomName\"; \"add roomName\"; \"take itemName\"; \"drop itemName\"; \"getDescription itemName\"; \"quit\" ");
+
+            Command command;
+
 
             response = s.nextLine();
-
-            Command command = Command.parseCommand(response);
-
-            command.execute();
-
-            if (response.substring(0, 4).equalsIgnoreCase("goto")) {
-                String room = response.substring(response.indexOf("<") + 1, response.indexOf(">"));
-                p.setCurrentRoom(g.getNode(room));
-                for (Creature c : creatureList) {
-                    c.move(p);
-                }
-
-            } else if (response.equalsIgnoreCase("look")) {
-                ArrayList<Graph.Node> roomList = p.getCurrentRoom().getNeighbors();
-                ArrayList<Item> itemList = p.getCurrentRoom().getItems();
-
-                String out = "";
-                for (Graph.Node n :
-                        roomList) {
-                    out += n.getName() + " ";
-                }
-                if (out.isEmpty()) System.out.println("You have hit a dead end.");
-                else System.out.println("Possible paths: " + out);
-
-                out = "";
-                for (Item i : itemList) {
-                    out += i.getName() + " ";
-                }
-                for (Creature c : creatureList) {
-                    if(c.getLocation().getName().equalsIgnoreCase(p.getCurrentRoom().getName())) out += c.getType() + " ";
-                }
-                if (out.isEmpty()) System.out.println("This room appears to be empty.");
-                else System.out.println("This room contains: " + out);
-
-            } else if (response.equalsIgnoreCase("view inventory")) {
-                String out = "";
-                for (Item i : p.getItems()) {
-                    out += i.getName() + " ";
-                }
-                System.out.println(out);
-
-            } else if (response.substring(0, 3).equalsIgnoreCase("add")) {
-                String room = response.substring(response.indexOf("<") + 1, response.indexOf(">"));
-                g.addNode(room, "");
-                g.addDirectedEdge(p.getCurrentRoom().getName(), room);
-                p.setCurrentRoom(g.getNode(room));
-
-            } else if (response.substring(0, 4).equalsIgnoreCase("take")) {
-                String entity = response.substring(response.indexOf("<") + 1, response.indexOf(">"));
-                p.addItem(p.getCurrentRoom().removeItem(entity));
-
-            } else if (response.substring(0, 4).equalsIgnoreCase("drop")) {
-                String item = response.substring(response.indexOf("<") + 1, response.indexOf(">"));
-                p.getCurrentRoom().addItem(p.removeItem(item));
-
-            } else if (response.substring(0, 14).equalsIgnoreCase("getDescription")) {
-                String item = response.substring(response.indexOf("<") + 1, response.indexOf(">"));
-                System.out.println(p.getItem(item).getDescription());
-            }
+            command = Command.parseCommand(response, p, g);
+            if (command != null) command.execute();
 
         } while (!response.equals("quit"));
     }

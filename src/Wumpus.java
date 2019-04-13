@@ -9,15 +9,13 @@ public class Wumpus extends Creature {
     @Override
     void move(Player p) {
         ArrayList<Graph.Node> possiblePaths = currentRoom.getNeighbors();
-        for (Graph.Node wumpus:currentRoom.getNeighbors()) {
-            for(Graph.Node player:p.getCurrentRoom().getNeighbors()) {
-                if(wumpus == player) {
-                    possiblePaths.remove(wumpus);
-                }
+        for (Graph.Node wumpus : currentRoom.getNeighbors()) {
+            if (wumpus == p.getCurrentRoom()) {
+                possiblePaths.remove(wumpus);
             }
         }
 
-        currentRoom = possiblePaths.get((int)(Math.random()*possiblePaths.size()));
+        currentRoom = possiblePaths.get((int) (Math.random() * possiblePaths.size()));
     }
 
     @Override

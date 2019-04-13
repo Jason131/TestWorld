@@ -7,8 +7,8 @@ public class Graph {
     private List<Creature> creatureList;
 
     public Graph() {
-        nodes = new HashMap<String, Node>();
-        creatureList= new ArrayList<Creature>();
+        nodes = new HashMap<>();
+        creatureList = new ArrayList<>();
     }
 
     public void addNode(String n, String description) {
@@ -34,36 +34,20 @@ public class Graph {
     public List<Creature> getCreatures(Node n) {
         List<Creature> output = new ArrayList<Creature>();
 
-        for (Creature c:creatureList) {
-            if(c.getLocation().equals(n.getName()))  output.add(c);
+        for (Creature c : creatureList) {
+            if (c.getLocation().getName().equals(n.getName())) output.add(c);
         }
 
         return output;
 
     }
 
-    public Node getNode(String name) {
-        return nodes.get(name);
+    public List<Creature> getAllCreatures() {
+        return creatureList;
     }
 
-    public static void findPathToPlayer(ArrayList<Graph.Node> nodesToSearch, ArrayList<Graph.Node> path, Graph.Node startingNode) {
-        for (Node node : nodesToSearch) {
-            if (node == path.get(0)) {
-                path.add(0, node);
-                if (node != startingNode) {
-                    nodesToSearch.clear();
-                    nodesToSearch.add(startingNode);
-                    findPathToPlayer(nodesToSearch, path, startingNode);
-                } else return;
-            }
-        }
-        for (Node node : nodesToSearch) {
-            for (Node newNode: node.getNeighbors()) {
-                nodesToSearch.add(newNode);
-            }
-            nodesToSearch.remove(node);
-        }
-        findPathToPlayer(nodesToSearch, path, startingNode);
+    public Node getNode(String name) {
+        return nodes.get(name);
     }
 
     public class Node {
@@ -103,7 +87,6 @@ public class Graph {
 
             return null;
         }
-
 
 
         public String getName() {

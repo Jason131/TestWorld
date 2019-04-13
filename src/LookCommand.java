@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class LookCommand extends Command {
-    public LookCommand(Player player) {
-        super(player);
+    public LookCommand() {
+        super(player, game);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class LookCommand extends Command {
         for (Item i : itemList) {
             out += i.getName() + " ";
         }
-        for (Creature c : creatureList) {
+        for (Creature c : game.getCreatures(player.getCurrentRoom())) {
             if (c.getLocation().getName().equalsIgnoreCase(player.getCurrentRoom().getName())) out += c.getType() + " ";
         }
 

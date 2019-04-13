@@ -1,13 +1,13 @@
 public class TakeCommand extends Command {
     String item;
 
-    public TakeCommand(Player player, String itemName) {
-        super(player);
+    public TakeCommand(String itemName) {
+        super(player,game);
         item = itemName;
     }
 
     @Override
     void execute() {
-        player.addItem(player.getCurrentRoom().getItem(item));
+        player.addItem(player.getCurrentRoom().removeItem(item));
     }
 }
