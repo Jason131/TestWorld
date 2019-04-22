@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Graph {
     private HashMap<String, Node> nodes;
-    private List<Creature> creatureList;
+    private List<Creature> masterCreatureList;
 
     public Graph() {
         nodes = new HashMap<>();
-        creatureList = new ArrayList<>();
+        masterCreatureList = new ArrayList<>();
     }
 
     public void addNode(String n, String description) {
@@ -28,13 +28,13 @@ public class Graph {
     }
 
     public void addCreature(Creature c) {
-        creatureList.add(c);
+        masterCreatureList.add(c);
     }
 
     public List<Creature> getCreatures(Node n) {
         List<Creature> output = new ArrayList<Creature>();
 
-        for (Creature c : creatureList) {
+        for (Creature c : masterCreatureList) {
             if (c.getLocation().getName().equals(n.getName())) output.add(c);
         }
 
@@ -43,7 +43,7 @@ public class Graph {
     }
 
     public List<Creature> getAllCreatures() {
-        return creatureList;
+        return masterCreatureList;
     }
 
     public Node getNode(String name) {
